@@ -49,9 +49,36 @@ SCHEMA = {
 
 
 # ---- tiny helpers ----
-def load_lines(path: str) -> list[str]:
+def load_feeds(path: str) -> list[dict]:
+    """
+    Supports:
+    - blank lines
+    - comments starting with #
+    - optional naming via: Name | URL
+
+    Returns list of:
+    { "name": "...", "url": "..." }
+    """
+    feeds = []
+
     with open(path, "r", encoding="utf-8") as f:
-        return [s for s in (ln.strip() for ln in f) if s and not s.startswith("#")]
+        for line in f:
+            s = line.strip()
+            if not s or s.startswith("#"):
+                continue
+
+            # Named feed: "Name | URL"
+            if "|" in s:
+                name, url = [x.strip() for x in s.split("|", 1)]
+            else:
+                name, url = None, s
+
+            feeds.append({
+                "name": name,
+                "url": url
+            })
+
+    return feeds
 
 def read_text(path: str) -> str:
     with open(path, "r", encoding="utf-8") as f:
@@ -102,12 +129,19 @@ def parse_date(entry) -> datetime | None:
                 pass
     return None
 
-def fetch_rss_items(feed_urls: list[str]) -> list[dict]:
+def fetch_rss_items(feeds: list[dict]) -> list[dict]:
     cutoff = datetime.now(timezone.utc) - timedelta(days=LOOKBACK_DAYS)
     items = []
-    for url in feed_urls:
+    for feed in feeds:
+        url = feed["url"]
         d = feedparser.parse(url)
-        source = (d.feed.get("title") or url).strip()
+
+        # Priority: manual name > RSS title > URL
+        source = (
+            feed.get("name")
+            or d.feed.get("title")
+            or url
+        ).strip()
         for e in d.entries[:MAX_ITEMS_PER_FEED]:
             title = (e.get("title") or "").strip()
             link = (e.get("link") or "").strip()
@@ -178,7 +212,7 @@ def call_openai_triage(client: OpenAI, interests: dict, items: list[dict]) -> di
         .replace("{{NARRATIVE}}", interests["narrative"])
         .replace("{{ITEMS}}", json.dumps(lean_items, ensure_ascii=False))
     )
-    
+
     last = None
     for attempt in range(6):
         try:
@@ -259,9 +293,8 @@ def render_digest_md(result: dict, items_by_id: dict[str, dict]) -> str:
 
 def main():
     interests = parse_interests_md(read_text("interests.md"))
-    feed_urls = load_lines("feeds.txt")
-
-    items = fetch_rss_items(feed_urls)
+    feeds = load_feeds("feeds.txt")
+    items = fetch_rss_items(feeds)
     print(f"Fetched {len(items)} RSS items (pre-filter)")
 
     today = datetime.now(timezone.utc).date().isoformat()
