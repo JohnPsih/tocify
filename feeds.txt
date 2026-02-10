@@ -22,3 +22,8 @@ Journal of Fluid Mechanics | https://www.cambridge.org/core/rss/product/id/723F5
 Annual Review of Fluid Mechanics | https://www.annualreviews.org/action/showFeed?type=etoc&feed=rss&jc=fluid
 Journal of Non-Newtonian Fluid Mechanics | https://rss.sciencedirect.com/publication/science/03770257
 
+# arXiv preprint archives
+arXiv Fluid Dynamics | https://rss.arxiv.org/rss/physics.flu-dyn
+arXiv Biological Physics | https://rss.arxiv.org/rss/physics.bio-ph
+arXiv Soft Condensed Matter | https://rss.arxiv.org/rss/cond-mat.soft
+
