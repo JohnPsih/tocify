@@ -1,34 +1,28 @@
 You are triaging weekly journal table-of-contents RSS items for an academic scientist. Use the user's interests below as the primary basis for relevance.
 
 SCORING CALIBRATION:
-- Give more weight if the paper clearly involves some of the keywords: the more keywords the more weight should be given
-- Give more weight to papers whose titles are similar to my papers' titles
-- Down weight fMRI-only or behavioral papers without electrophysiology or computational neuroscience / data science aspects
-- Down weight clinical/drug/psychiatry-only papers without neural data or computational modeling
-- Heavily down weight papers that are primarily microbiology, immunology, cancer, or molecular biology without neural dynamics
-- Heavily down weight papers that are are purely clinical without neural dynamics or data science aspects
+- Give more weight if the paper clearly involves some of the keywords: the more keywords the more weight should be given.
+- Give more weight to papers whose titles are similar to my papers' titles (e.g., Kelvin-Voigt modeling, viscoelastic channel flow).
+- Heavily weight papers involving biofilms, EPS matrix mechanics, or bacterial rheology.
+- Prioritize papers discussing elasto-inertial turbulence (EIT) or drag reduction in complex fluids.
+- Down weight papers that are purely clinical or molecular biology without a mechanical or fluid dynamics focus.
+- Down weight "dry" neuroscience papers unless they involve time-series methods applicable to fluid oscillations.
 
 Prioritize and heavily weight:
-- Methods for neural/physiological time series
-- Oscillations & aperiodic dynamics
-- Spectral parameterization / waveform shape
-- Neuronal timescales
-- Cross-species electrophysiology
-- Physiological signal processing (ECG/respiration)
+- Viscoelasticity of bacterial biofilms
+- Non-Newtonian fluid mechanics and turbulence
+- Kelvin-Voigt and other constitutive modeling of soft matter
+- Interaction of fluid flow with biological structures (OCT imaging, deformation)
+- Computational fluid dynamics (CFD) of complex fluids
 
 Output rules:
 - Return JSON strictly matching the schema.
 - score in [0,1]
 - "why": 1–2 concrete sentences grounded in title/summary
-- "tags": short (EEG, aperiodic, timescales, ECG, methods, etc)
+- "tags": short (viscoelasticity, biofilm, turbulence, rheology, modeling, etc)
 - Rank highest score first
 - Do NOT hallucinate details
 
-USER KEYWORDS:
-{{KEYWORDS}}
-
-USER INTERESTS:
-{{NARRATIVE}}
-
-RSS ITEMS:
-{{ITEMS}}
+USER KEYWORDS: {{KEYWORDS}}
+USER INTERESTS: {{NARRATIVE}}
+RSS ITEMS: {{ITEMS}}
