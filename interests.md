@@ -17,32 +17,13 @@ If it is primarily microbiology/immunology/metabolism/genetics without neural dy
   cap score at 0.25. -->
 
 ## keywords
-EEG
-electroencephalography
-MEG
-magnetooencephalography
-LFP
-local field potential
-iEEG
-ECoG
-electrocorticography
-neural oscillations
-aperiodic activity
-neural timescales
-ECG
-electrocorticography
-working memory
-attention
-cognitive control
-respiration waveform
-specparam
-spectral parameterization
-fooof
-bycycle
-neural data science
-computational neuroscience
-neural computation
-aging and cognition
+-viscoelastic flow 
+-mathematical modeling 
+-dynamics of turbulence in simple and complex fluids
+-Structure and dynamics of turbulence in viscoelastic channel flow
+-modelling of biofilms
+-Characterizing the Viscoelastic Behavior of Biofilm: Modeling and Experimental Studies 
+-The Viscoelastic Properties of Biofilm Infections and Mechanical Interactions with Phagocytic Immune Cells
 
 ## narrative
 My research focuses on large-scale neural and physiological dynamics using computational and data-science approaches across species and recording modalities. I work extensively with heterogeneous datasets (EEG, LFP, iEEG, behavioral and physiological signals), emphasizing open science, reproducible methods, and scalable analysis tools for neural time series.
